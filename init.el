@@ -1,0 +1,126 @@
+;; init file for emacs
+;; dongbo
+
+;; el-get
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil t)
+  (url-retrieve
+   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+   (lambda (s)
+     (let (el-get-master-branch)
+       (goto-char (point-max))
+       (eval-print-last-sexp)))))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(setq el-get-user-package-directory "~/.emacs.d/el-get-user")
+
+;; some packages requires elpa and emacswiki
+(setq my-packages 
+      '(
+	php-mode
+	ascii
+	el-get
+	emacs-w3m
+	wc-mode
+	org
+	markdown-mode
+	auto-complete
+	auto-complete-emacs-lisp
+	yasnippet
+	cedet
+	erc
+	doxymacs
+	yaml-mode
+	golden-ratio
+	color-theme
+	simplenote
+	ac-octave
+	echoline-mode
+	header2
+        ))
+
+(el-get 'sync my-packages)
+
+;; third-party tool config
+
+;; cedet config
+;; mode config
+(require 'semantic)
+(global-ede-mode t)                      ; Enable the Project management system
+(semantic-load-enable-excessive-code-helpers)
+(semantic-load-enable-minimum-features)
+(semantic-load-enable-code-helpers)           ; enable start completion jump
+(semantic-load-enable-gaudy-code-helpers)      ; Enable prototype help and smart completion and function start prompt
+(global-srecode-minor-mode 1)            ; Enable template insertion menu
+
+
+;; format config
+;; set the window patterns
+(show-paren-mode t)
+;; set the tab width
+(setq tab-width 4)
+(setq default-tab-width 4)
+(setq c-default-style "linux" 
+	  c-basic-offset 4)
+;; ido mode
+(ido-mode t)
+
+;; auto mode
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)) ;; yaml
+(add-to-list 'auto-mode-alist '("\\.bash_alias" . sh-mode)) ;; shell
+;; php
+(add-to-list 'auto-mode-alist
+	     '("\\.php[34]?\\'\\|\\.phtml\\'" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.module\\'" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.inc\\'" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.proto\\'" . c-mode))
+
+;; key config
+;; avoid c-space 
+(global-set-key (kbd "C-SPC") 'nil)
+
+;; doxygen mode
+(add-hook 'c-mode-common-hook 'doxymacs-mode)
+
+;;yasnippet mode
+(yas-global-mode 1)
+
+;; auto-complete
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; golden ratio mode
+(golden-ratio-mode 1)
+
+;; themes
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;; temperarily use this theme
+;;(color-theme-aalto-light)
+
+;; simplenote
+(require 'simplenote)
+(setq simplenote-email "dbkaiser@gmail.com")
+(setq simplenote-password nil);; so will ask pwd
+(simplenote-setup)
+
+;; auto-header (require header2)
+(autoload 'auto-update-file-header "header2")
+(autoload 'auto-make-header "header2")
+(add-hook 'write-file-hooks 'auto-update-file-header)
+(add-hook 'emacs-lisp-mode-hook 'auto-make-header)
+(add-hook 'c-mode-common-hook   'auto-make-header)
+(add-hook 'python-mode-hook   'auto-make-header)
+(add-hook 'sh-mode-hook   'auto-make-header)
+
+;; android mode setting
+;;(require 'cl-lib)
+;;(require 'android-mode)
+;;(defcustom android-mode-sdk-dir "~/tool/android-sdks")
+
+;;===========================
+;; self coding lisp
+(load "~/.emacs.d/mylisp/my.el")
+
+;; quick mode for loading emacs configure file
+;; TODO 

@@ -1,0 +1,6 @@
+*.elc
+*~
+*.dat
+#*
+el-get/*
+url/*

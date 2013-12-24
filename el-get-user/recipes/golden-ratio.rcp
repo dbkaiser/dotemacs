@@ -1,0 +1,5 @@
+(:name golden-ratio
+       :website "https://github.com/roman/golden-ratio.el"
+       :description "Automatically resizes the windows you are working on to the size specified in the Golden Ratio."
+       :type github
+       :pkgname "roman/golden-ratio.el")
