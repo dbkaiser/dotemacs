@@ -1,0 +1,4 @@
+(:name minimap
+:auto-generated t
+:type elpa
+:description "Sidebar showing a "mini-map" of a buffer")

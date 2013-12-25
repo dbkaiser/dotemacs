@@ -38,6 +38,7 @@
 	ac-octave
 	echoline-mode
 	header2
+	ropemacs ;; require hg to install
         ))
 
 (el-get 'sync my-packages)

@@ -1,0 +1,292 @@
+<div style="overflow: no-scroll; width: 100%; font-size: 14px; font-weight: 400;"><div class="pcxt" style="width:100%">
+    <style>
+
+        .ui-lrc-sentence{
+
+            float: left;
+
+            margin: 0 6px;
+
+            display: inline;
+
+            color:#2a2a2a
+
+        }
+
+        .ui-lrc ul{
+
+            width:20000px;
+
+            height:30px;
+
+            padding:0;
+
+            margin:0;
+
+            line-height: 30px;
+
+        }
+
+        .lrc .ui-lrc-current{
+
+            /*color: #ffa800;*/
+
+        }
+
+        .lrc-face{
+
+            position:absolute;
+
+            width:100%;
+
+            height:100%;
+
+            opacity: 0.3;
+
+           /* background:-webkit-gradient(linear, 0 0, 100% 0, from(#eee),
+
+            to(#eee), color-stop(0.5,#ddd)*//*, color-stop(0.6,#eee)*//*);*/
+
+
+
+        }
+
+        .lrc-face div{
+
+            height:100%;
+
+            position:absolute;
+
+            width:28%;
+
+            opacity:0.8;
+
+            background:-webkit-gradient(linear, 0 0, 100% 0, from(#ccc),
+
+                                    to(#fff));
+
+        }
+
+        div.lrc-face-right{
+
+            right:0;
+
+            background:-webkit-gradient(linear, 0 0, 100% 0, from(#fff),
+
+                                    to(#ccc));
+
+        }
+
+    </style>
+<div class="mbox" id="mbox">
+
+                <div class="logo" ><a href="http://music.baidu.com" target="_blank" title="百度音乐"></a></div>
+
+                <div class="player-main">
+
+                    <div class="album-pic mbox-album"></div>
+
+                    <div class="right-wrapper">
+
+                        <div class="right-top">
+
+                            <div class="mbox-title player-title"></div>
+
+                        </div>
+
+                        <div class="bottom-bars">
+
+                            <div class="bottom-bars-item mbox-playBtn ctrl-btn stop"><a href="javascript:void(0)" onclick="return false;"></a></div>
+
+                            <div class="bottom-bars-item  progress "><div class="slider-wrapper mbox-slider"></div></div>
+
+                            <div class="bottom-bars-item mbox-time time"></div>
+
+                            <div class="bottom-bars-item volume">
+
+                                <a class="volume-btn mbox-mute" href="javascript:void(0)" onclick="return false;"  title="">&nbsp</a>
+
+                                <div class="slider-wrapper mbox-volume"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                </div>
+
+<div class="lrc-container" style="height:30px;width:500px;overflow:hidden;position:relative">
+
+    <div class="lrc-face">
+
+        <div class="lrc-face-left"></div>
+
+        <div class="lrc-face-right"></div>
+
+    </div>
+
+    <div id="lrcWrap" style="width:100%;height:100%;overflow:hidden">
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript" src="js/common/tangram-custom.js"></script>
+
+<script type="text/javascript" src="js/common/common.js"></script>
+
+<script type="text/javascript" src="js/config/config.js"></script>
+
+<script type="text/javascript" src="js/playcore/PlayEngine_Interface.js"></script>
+
+<script type="text/javascript" src="js/playcore/PlayEngine_Audio.js"></script>
+
+<script type="text/javascript" src="js/playcore/PlayEngine_FMP_MP3.js"></script>
+
+<script type="text/javascript" src="js/playcore/PlayEngine.js"></script>
+
+<script type="text/javascript" src="js/logic/PlayerLog.js"></script>
+
+
+
+<script type="text/javascript" src="js/logic/SongModel.js"></script>
+
+<script type="text/javascript" src="js/logic/SongDataModel.js"></script>
+
+<script type="text/javascript" src="js/logic/PlayList.js"></script>
+
+<script type="text/javascript" src="js/logic/log.js"></script>
+
+<script type="text/javascript" src="js/logic/PlayCtrl.js"></script>
+
+<script type="text/javascript" src="js/common/jquery-1.7.2.js"></script>
+
+<script src="js/ui/uiConf.js"></script>
+
+<script src="js/ui/baiduTemplate.js"></script>
+
+<script src="js/ui/widget/jquery.ui.core.js"></script>
+
+<script src="js/ui/widget/jquery.ui.widget.js"></script>
+
+<script src="js/ui/widget/jquery.ui.mouse.js"></script>
+
+<script src="js/ui/widget/jquery.ui.slider.js"></script>
+
+<script src="js/ui/widget/lrc.js"></script>
+
+<script src="js/ui/widget/button.js"></script>
+
+<script src="js/ui/UiCtrl.js"></script>
+
+<script type="text/javascript" src="js/controller/Controller.js"></script>
+
+<script>
+
+    var $root = $('#mbox');
+
+    var uiConf = {
+
+        domJson : {
+
+            album : {
+
+                dom :  $('.mbox-album', $root),
+
+                tpl : '<img class="pic" data-src="<%=songPicSmall%>"/>'
+
+            },
+
+            title : {
+
+                dom : $('.mbox-title', $root),
+
+                tpl : '<div class="song-name song-info" songid="<%=songId%>">' +
+
+                        '<a href="http://music.baidu.com/song/<%=songId%>" target="_blank"><%=songName%></a></div>'+
+
+                        '<span class="artist song-info">歌手：<span class="artist-name">' +
+
+                        '<a href="http://music.baidu.com/artist/<%=artistId%>" target="_blank"><%=artistName%></a></span></span>'+
+
+                        '<span class="album song-info">专辑：<span class="album-name">' +
+
+                        '<a href="http://music.baidu.com/album/<%=albumId%>" target="_blank"><%=albumName%></a></span></span>'
+
+            },
+
+
+
+            time : {
+
+                dom : $('.mbox-time', $root),
+
+                tpl : '<%=curTime%>/<%=totalTime%>'
+
+            },
+
+            volume : {
+
+                dom : $('.mbox-volume', $root)
+
+            },
+
+            mute : {
+
+                dom : $('.mbox-mute', $root)
+
+            },
+
+            slider : {
+
+                dom : $('.mbox-slider', $root)
+
+            },
+
+            playBtn : {
+
+                dom : $('.mbox-playBtn', $root)
+
+            },
+
+            lrc: {
+
+                dom : $('#lrcWrap'),
+
+                orientation : 'horizontal',
+
+                scrollAnimate : 'uniform'
+
+            }
+
+        }
+
+    };
+
+
+
+    var bd_mbox = new mbox.PlayCtrl({
+
+        songId : [1149563,34185463,18258126]
+
+    }),
+
+       ctrl = new mbox.Controller(bd_mbox);
+
+    var ui = new mbox.UiCtrl(undefined, uiConf);
+
+    ctrl.bindUi(ui);
+
+
+
+</script>
+</div></div>
