@@ -11,9 +11,9 @@
 ;; Created: Tue Aug  4 17:06:46 1987
 ;; Version: 0
 ;; Package-Requires: ()
-;; Last-Updated: 三 12月 25 13:45:49 2013 (+0800)
+;; Last-Updated: 二  1月 14 12:06:50 2014 (+0800)
 ;;           By: dongbo
-;;     Update #: 1844
+;;     Update #: 1845
 ;; URL: http://www.emacswiki.org/header2.el
 ;; Doc URL: http://emacswiki.org/AutomaticFileHeaders
 ;; Keywords: tools, docs, maint, abbrev, local
@@ -402,6 +402,7 @@ t means use local time with timezone; nil means use UTC."
                               header-title
                               header-blank
                               header-file-name
+							  header-encoding
                               header-description
 							  header-usage
                               ;;header-status
@@ -545,6 +546,10 @@ packages."
 (defsubst header-description ()
   "Insert \"Description: \" line."
   (insert header-prefix-string "Description: \n"))
+
+(defsubst header-encoding ()
+  "Insert \"Encoding: \" line."
+  (insert header-prefix-string "encoding=utf-8: \n"))
 
 (defsubst header-author ()
   "Insert current user's name (`user-full-name') as this file's author."
