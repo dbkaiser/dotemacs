@@ -18,6 +18,7 @@
 ;; some packages requires elpa and emacswiki
 (setq my-packages 
       '(
+	cl-lib  ;; this is required by yasnippet etc. of later version
 	php-mode
 	ascii
 	el-get
@@ -38,7 +39,8 @@
 	ac-octave
 	echoline-mode
 	header2
-	ropemacs ;; require hg to install
+	pymacs   ;; required by ropmacs
+	ropemacs ;; require hg to install ;; it's a little tricky. for the rope and ropemacs are written in python , so we need to install them firstly by running python setup.py in relevant directories. then written certain configurations as down below
         ))
 
 (el-get 'sync my-packages)
@@ -113,6 +115,9 @@
 (add-hook 'c-mode-common-hook   'auto-make-header)
 (add-hook 'python-mode-hook   'auto-make-header)
 (add-hook 'sh-mode-hook   'auto-make-header)
+
+;; rope emacs configurations
+
 
 ;; android mode setting
 ;;(require 'cl-lib)
