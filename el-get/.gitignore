@@ -1,5 +1,5 @@
 # ignore everything
 *
-# but this
+# but keep the header configure
 !header2/
 !.gitignore
