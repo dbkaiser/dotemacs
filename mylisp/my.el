@@ -67,6 +67,16 @@
   (shell-command (concat "google-chrome \"http://play.baidu.com/?__m=mboxCtrl.playSong&__a=" myStr "\""))
 )
 
+(defun search-current-line-in-baidu-music()
+  "Search current line by baidu music"
+  (interactive)
+  (setq myStr (thing-at-point 'line))
+  (when (string-match "[ \t\n]*" myStr)
+	(setq myStr (replace-match "+" nil nil myStr))
+  )
+  (shell-command (concat "google-chrome \"http://music.baidu.com/search?key=" myStr "\""))
+)
+
 (defun copy-current-word-to-other-window()
   "copy the current word on point to the other window"
   (interactive)
@@ -127,6 +137,7 @@
 (global-set-key (kbd "M-s M-s") 'call-current-songid)
 (global-set-key (kbd "M-s M-a") 'copy-current-word-to-other-window)
 (global-set-key (kbd "M-s M-d") 'copy-current-line-to-other-window)
+(global-set-key (kbd "M-s M-w") 'search-current-line-in-baidu-music)
 
 ; for semantic 
 (global-set-key [f12] 'semantic-ia-fast-jump)
