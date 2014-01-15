@@ -58,6 +58,7 @@
 )
 
 ;; self defined functions
+
 (defun call-current-songid()
   "Call the current link with google chrome"
   (interactive)
@@ -81,10 +82,20 @@
 (defun copy-current-thing-to-other-window(thing)
   "copyt current stuff to other window, the thing to copy could be line or symbol"
   (setq myStr (thing-at-point thing))
+  (setq myStr (chomp myStr))
   (other-window 1)
   (princ (concat myStr "\n") (current-buffer))
   (other-window 1)
 )
+
+(defun chomp(str)
+  "Chomp leading and tailing whitespace from STR."
+  (when (string-match "[ \t\n]*$" str)
+	(setq str (replace-match "" nil nil str))
+  )
+  str
+)
+
 
 ;; org functions
 ;; insert source code block
