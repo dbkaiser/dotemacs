@@ -69,7 +69,18 @@
 (defun copy-current-word-to-other-window()
   "copy the current word on point to the other window"
   (interactive)
-  (setq myStr (thing-at-point 'symbol))
+  (copy-current-thing-to-other-window 'symbol)
+)
+
+(defun copy-current-line-to-other-window()
+  "copy the current line on point to the other window"
+  (interactive)
+  (copy-current-thing-to-other-window 'line)
+)
+
+(defun copy-current-thing-to-other-window(thing)
+  "copyt current stuff to other window, the thing to copy could be line or symbol"
+  (setq myStr (thing-at-point thing))
   (other-window 1)
   (princ (concat myStr "\n") (current-buffer))
   (other-window 1)
@@ -104,6 +115,7 @@
 (global-set-key (kbd "C-c f") 'elisp-index-search)
 (global-set-key (kbd "M-s M-s") 'call-current-songid)
 (global-set-key (kbd "M-s M-a") 'copy-current-word-to-other-window)
+(global-set-key (kbd "M-s M-d") 'copy-current-line-to-other-window)
 
 ; for semantic 
 (global-set-key [f12] 'semantic-ia-fast-jump)

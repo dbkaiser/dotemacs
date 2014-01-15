@@ -72,6 +72,7 @@
 ;; auto mode
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)) ;; yaml
 (add-to-list 'auto-mode-alist '("\\.bash_alias" . sh-mode)) ;; shell
+(add-to-list 'auto-mode-alist '("\\.m" . octave-mode)) ;; shell
 ;; php
 (add-to-list 'auto-mode-alist
 	     '("\\.php[34]?\\'\\|\\.phtml\\'" . php-mode))
