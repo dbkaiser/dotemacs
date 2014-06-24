@@ -24,7 +24,7 @@
 	el-get
 	emacs-w3m
 	wc-mode
-	org
+	org-mode
 	markdown-mode
 	auto-complete
 	auto-complete-emacs-lisp
