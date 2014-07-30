@@ -127,6 +127,8 @@
     (previous-line 2)
     (org-edit-src-code)))
 
+;; windows settings
+(set-background-color "LightYellow2")
 
 ;; quick keys:
 (global-set-key (kbd "C-c C-h") 'org-html-export-to-html)

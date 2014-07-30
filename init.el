@@ -4,6 +4,9 @@
 ;; el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
+;; custom scripts
+(add-to-list 'load-path "~/.emacs.d/mylisp/")
+
 (unless (require 'el-get nil t)
   (url-retrieve
    "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
@@ -57,6 +60,8 @@
 (semantic-load-enable-gaudy-code-helpers)      ; Enable prototype help and smart completion and function start prompt
 (global-srecode-minor-mode 1)            ; Enable template insertion menu
 
+;; cscope config
+(require 'xcscope)
 
 ;; format config
 ;; set the window patterns
@@ -95,7 +100,7 @@
 (ac-config-default)
 
 ;; golden ratio mode
-(golden-ratio-mode 1)
+(golden-ratio-mode 0)
 
 ;; themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
@@ -127,7 +132,21 @@
 
 ;;===========================
 ;; self coding lisp
+;(require 'my)
 (load "~/.emacs.d/mylisp/my.el")
 
 ;; quick mode for loading emacs configure file
 ;; TODO 
+
+;;;; FONTS
+(set-language-environment 'UTF-8)
+(set-locale-environment "UTF-8")
+(set-default-font "Dejavu Mono 16")
+(if (and (fboundp 'daemonp) (daemonp))
+	(add-hook 'after-make-frame-functions
+			  (lambda (frame)
+				(with-selected-frame frame
+				  (set-fontset-font "fontset-default"
+									'unicode "黑体 16"))))
+  (set-fontset-font "fontset-default" 'unicode "黑体 16"))
+
