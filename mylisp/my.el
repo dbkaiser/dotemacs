@@ -57,6 +57,19 @@
    )
 )
 
+;; Quick open init emacs file
+(defun open-init-file ()
+  "Open the emacs default config file"
+  (interactive
+   (find-file "~/.emacs.d/init.el")))
+
+;; Quick open this file 
+(defun open-my-el-file ()
+  "Open this file to edit"
+  (interactive
+   (find-file "~/.emacs.d/mylisp/my.el")))
+
+
 ;; self defined functions
 
 (defun call-current-songid()
@@ -140,6 +153,9 @@
 (global-set-key (kbd "M-s M-a") 'copy-current-word-to-other-window)
 (global-set-key (kbd "M-s M-d") 'copy-current-line-to-other-window)
 (global-set-key (kbd "M-s M-w") 'search-current-line-in-baidu-music)
+(global-set-key (kbd "C-c a i") 'open-init-file)
+(global-set-key (kbd "C-c a m") 'open-my-el-file)
+
 
 ; for semantic 
 (global-set-key [f12] 'semantic-ia-fast-jump)

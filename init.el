@@ -85,6 +85,11 @@
 (add-to-list 'auto-mode-alist '("\\.inc\\'" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . c-mode))
 
+;;markdown
+(add-to-list 'auto-mode-alist '("\\.md" . markdown-mode)) ;; md file
+(add-to-list 'auto-mode-alist '("\\.markdown" . markdown-mode)) ;; markdown file
+
+
 ;; key config
 ;; avoid c-space 
 (global-set-key (kbd "C-SPC") 'nil)
