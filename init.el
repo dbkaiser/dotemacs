@@ -144,14 +144,15 @@
 ;; TODO 
 
 ;;;; FONTS
-(set-language-environment 'UTF-8)
-(set-locale-environment "UTF-8")
-(set-default-font "Dejavu Mono 16")
-(if (and (fboundp 'daemonp) (daemonp))
-	(add-hook 'after-make-frame-functions
-			  (lambda (frame)
-				(with-selected-frame frame
-				  (set-fontset-font "fontset-default"
+if( (eq system-type 'darwin)
+	(set-language-environment 'UTF-8)
+	(set-locale-environment "UTF-8")
+	(set-default-font "Dejavu Mono 16")
+	(if (and (fboundp 'daemonp) (daemonp))
+		(add-hook 'after-make-frame-functions
+				  (lambda (frame)
+					(with-selected-frame frame
+					  (set-fontset-font "fontset-default"
 									'unicode "黑体 16"))))
-  (set-fontset-font "fontset-default" 'unicode "黑体 16"))
-
+	  (set-fontset-font "fontset-default" 'unicode "黑体 16"))
+)
