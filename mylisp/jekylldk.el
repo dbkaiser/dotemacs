@@ -8,77 +8,61 @@
 ;; Copyright: Baidu Inc. 2013-2014
 ;; Created: 三  7 30 22:38:20 2014 (+0800)
 ;; Version: 
-;; Last-Updated: 日  8  3 22:27:46 2014 (+0800)
+;; Last-Updated: 三  8  6 17:00:13 2014 (+0800)
 ;;           By: DongBo
-;;     Update #: 1
+;;     Update #: 22
 ;; 
 ;;; Code:
 
-;; Jekyll路径
-(setq jekyll-workdir (expand-file-name "$HOME/Documents/blog/githublog"))
+;; Jekyll working directory
+(setq jekyll-workdir (expand-file-name "/Users/dongbo/Documents/blog/githublog"))
 
 
-(defun jekyll-rake (command)
+(defun jekyll-rake (command &optional back)
   "run rake commands"
-  (let ((command-str (format "bash -l -c 'source $HOME/.rvm/scripts/rvm && rvm use ruby-1.9.2-p320 && cd %s && rake %s'" octopress-workdir command))) ;; RVM变量设置
-    (shell-command-to-string command-str)))
+  (let ((command-str (format "bash -c \"cd %s && rake %s\"" jekyll-workdir command))) 
+	(if back (shell-command-to-string command-str) (shell-command command-str))))
 
 
 (defun jekyll-new (class title)
-  (let* ((command-str (format "new_%s[\"%s\"]" class title))
-         (command-result (octopress-rake command-str))
-         (regexp-str (format "Creating new %s: " class))
+  (let* ((command-str (format "%s'%s'" class title))
+         (command-result (jekyll-rake command-str))
          (filename))
+	(message command-result)
     (progn
-      (setq filename (concat octopress-workdir "/"
-                             (replace-regexp-in-string regexp-str ""
-                                                       (car (cdr (reverse (split-string command-result "\n")))))))
+      (setq filename (concat jekyll-workdir "/" (get-last-word command-result)))
       (find-file filename))))
 
 
-(defun octopress-new-post (title)
+(defun jekyll-new-post (title)
   "begin a new post in source/_posts"
   (interactive "MTitle: ")
-  (octopress-new "post" title))
+  (jekyll-new "post title=" title))
 
 
-(defun octopress-new-page (title)
-  "create a new page in source/(filename)/index.markdown"
+(defun jekyll-new-page (title)
+  "create a new page in root directory"
   (interactive "MTitle: ")
-  (octopress-new "page" title))
+  (jekyll-new "page name=" title))
 
 
-(defun octopress-generate ()
-  "generate jekyll site"
+(defun jekyll-preview ()
+  "preview the site in a web browser. has bug."
   (interactive)
-  (octopress-rake "generate")
-  (message "Generate site OK"))
+  (async-shell-command "cd ~/Documents/blog/githublog & jekyll serve &")
 
-
-(defun octopress-deploy ()
-  "default deploy task"
+(defun jekyll-stop ()
+  "Stop the jekyll server"
   (interactive)
-  (octopress-rake "deploy")
-  (message "Deploy site OK"))
+  (shell-command "kill `ps -ef | grep jekyll | grep -v \"grep\" | awk '{print $2}'`")
+  (message "Killed"))
 
-(defun octopress-rsync ()
-  "deploy website via rsync"
-  (octopress-rake "rsync")
-  (message "Rsync site OK"))
+(defun get-last-word (str)
+  "Get the last word of a string"
+  (car (last (split-string str)))
+  )
 
-(defun octopress-gen-deploy ()
-  "generate website and deploy"
-  (interactive)
-  (octopress-rake "gen_deploy")
-  (message "Generate and Deploy OK"))
-
-
-(defun octopress-preview ()
-  "preview the site in a web browser"
-  (interactive)
-  (octopress-rake "preview"))
-
-(provide 'octopress)
+(provide 'jekylldk)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; jekylldk.el ends here
