@@ -8,14 +8,14 @@
 ;; Copyright: Baidu Inc. 2013-2014
 ;; Created: 三  7 30 22:38:20 2014 (+0800)
 ;; Version: 
-;; Last-Updated: 三  8  6 17:00:13 2014 (+0800)
-;;           By: DongBo
-;;     Update #: 22
+;; Last-Updated: 日  8月 10 09:26:07 2014 (+0800)
+;;           By: dongbo
+;;     Update #: 24
 ;; 
 ;;; Code:
 
 ;; Jekyll working directory
-(setq jekyll-workdir (expand-file-name "/Users/dongbo/Documents/blog/githublog"))
+(setq jekyll-workdir (expand-file-name "~/Documents/blog/githublog"))
 
 
 (defun jekyll-rake (command &optional back)
