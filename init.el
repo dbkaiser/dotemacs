@@ -41,7 +41,7 @@
 	simplenote
 	ac-octave
 	echoline-mode
-;;	header2 this will be moved as self specified script
+;	header2 ;;this will be moved as self specified script
 	pymacs   ;; required by ropmacs
 	ropemacs ;; require hg to install ;; it's a little tricky. for the rope and ropemacs are written in python , so we need to install them firstly by running python setup.py in relevant directories. then written certain configurations as down below
         ))
@@ -118,7 +118,8 @@
 (setq simplenote-password nil);; so will ask pwd
 (simplenote-setup)
 
-;; auto-header (require header2)
+;; auto-header 
+(require 'header2)
 (autoload 'auto-update-file-header "header2")
 (autoload 'auto-make-header "header2")
 (add-hook 'write-file-hooks 'auto-update-file-header)

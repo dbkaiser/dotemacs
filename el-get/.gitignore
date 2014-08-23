@@ -1,5 +1,4 @@
 # ignore everything
 *
 # but keep the header configure
-!./header2/header2.el
 !.gitignore
