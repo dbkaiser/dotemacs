@@ -52,22 +52,21 @@
 ; Quick open todo file
 (defun open-todo-file ()
   "Open the todo file"
-  (interactive
-   (find-file "~/Dropbox/Ubuntu/todo.org")
-   )
+  (interactive)
+  (find-file "~/Dropbox/Ubuntu/todo.org")
 )
 
 ;; Quick open init emacs file
 (defun open-init-file ()
   "Open the emacs default config file"
-  (interactive
-   (find-file "~/.emacs.d/init.el")))
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
 
 ;; Quick open this file 
 (defun open-my-el-file ()
   "Open this file to edit"
-  (interactive
-   (find-file "~/.emacs.d/mylisp/my.el")))
+  (interactive) 
+  (find-file "~/.emacs.d/mylisp/my.el"))
 
 
 ;; self defined functions
