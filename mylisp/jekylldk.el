@@ -15,6 +15,7 @@
 ;;; Code:
 
 ;; Jekyll working directory
+
 (setq jekyll-workdir (expand-file-name "~/Documents/blog/githublog"))
 
 
@@ -45,11 +46,11 @@
   (interactive "MTitle: ")
   (jekyll-new "page name=" title))
 
-
-(defun jekyll-preview ()
-  "preview the site in a web browser. has bug."
-  (interactive)
-  (async-shell-command "cd ~/Documents/blog/githublog & jekyll serve &")
+; deprecated use it outside
+;(defun jekyll-preview ()
+;  "preview the site in a web browser. has bug."
+;  (interactive)
+;  (async-shell-command "cd ~/Documents/blog/githublog & jekyll serve &")
 
 (defun jekyll-stop ()
   "Stop the jekyll server"

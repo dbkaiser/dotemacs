@@ -89,6 +89,8 @@
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode)) ;; md file
 (add-to-list 'auto-mode-alist '("\\.markdown" . markdown-mode)) ;; markdown file
 
+;; blog jekyll things
+(require 'jekylldk)
 
 ;; key config
 ;; avoid c-space 
