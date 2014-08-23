@@ -37,6 +37,15 @@
   (interactive "P")
   (find-grep-current-word default-directory is-prompt))
 
+;; for code jump 
+(defun find-tag-current-word ()
+  "Find the current word without any prompting"
+  (interactive)
+  (let* ((word (current-word))) 
+	(if (not word)
+		(message "No word under cursor.")
+	  (find-tag word))))
+
 (defun set-grep-command (command)
   "Set `grep-command'."
      (setq grep-find-command command))
@@ -154,6 +163,8 @@
 (global-set-key (kbd "M-s M-w") 'search-current-line-in-baidu-music)
 (global-set-key (kbd "C-c a i") 'open-init-file)
 (global-set-key (kbd "C-c a m") 'open-my-el-file)
+(global-set-key (kbd "M-]") 'find-tag-current-word)
+(global-set-key (kbd "M-p") 'pop-tag-mark)
 
 
 ; for semantic 
