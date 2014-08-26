@@ -3,7 +3,7 @@
 (defun find-grep-in-dir (dir)
   "Run `find-grep' in directory DIR."
   (interactive (list (read-directory-name "Directory to find in: " default-directory "" t)))
-  (let ((prompt (concat "find " dir " -type f ! -path \"*/.svn*\" ! -path \"*~\" -print0 | xargs -0 -e grep -nH -e ")))
+  (let ((prompt (concat "find " dir " -type f ! -path \"*/.svn*\" ! -path \"*~\" ! -path \"cscope*\" -print0 | xargs -0 -e grep -nH -e ")))
     (set-grep-command prompt)
     (call-interactively 'find-grep)))
 
@@ -154,18 +154,19 @@
 ;; quick keys:
 (global-set-key (kbd "C-c C-h") 'org-html-export-to-html)
 (global-set-key (kbd "C-c s i") 'org-insert-src-block)
-(global-set-key (kbd "C-M-_") 'find-grep-current-word-in-current-dir)
 (global-set-key (kbd "M-RET") 'markdown-insert-list-item)
 (global-set-key (kbd "C-c f") 'elisp-index-search)
-(global-set-key (kbd "M-s M-s") 'call-current-songid)
-(global-set-key (kbd "M-s M-a") 'copy-current-word-to-other-window)
-(global-set-key (kbd "M-s M-d") 'copy-current-line-to-other-window)
-(global-set-key (kbd "M-s M-w") 'search-current-line-in-baidu-music)
+;; deprecated
+;(global-set-key (kbd "M-s M-s") 'call-current-songid)
+;(global-set-key (kbd "M-s M-a") 'copy-current-word-to-other-window)
+;(global-set-key (kbd "M-s M-d") 'copy-current-line-to-other-window)
+;(global-set-key (kbd "M-s M-w") 'search-current-line-in-baidu-music)
 (global-set-key (kbd "C-c a i") 'open-init-file)
 (global-set-key (kbd "C-c a m") 'open-my-el-file)
 (global-set-key (kbd "M-]") 'find-tag-current-word)
 (global-set-key (kbd "M-p") 'pop-tag-mark)
-
+(global-set-key (kbd "C-c C-g") 'org-set-tags)
+(global-set-key (kbd "C-M-_") 'find-grep-in-dir)
 
 ; for semantic 
 (global-set-key [f12] 'semantic-ia-fast-jump)
