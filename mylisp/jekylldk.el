@@ -8,9 +8,9 @@
 ;; Copyright: Baidu Inc. 2013-2014
 ;; Created: 三  7 30 22:38:20 2014 (+0800)
 ;; Version: 
-;; Last-Updated: 日  8月 10 09:26:07 2014 (+0800)
+;; Last-Updated: Sat Aug 23 17:39:21 2014 (+0800)
 ;;           By: dongbo
-;;     Update #: 24
+;;     Update #: 28
 ;; 
 ;;; Code:
 
@@ -19,10 +19,10 @@
 (setq jekyll-workdir (expand-file-name "~/Documents/blog/githublog"))
 
 
-(defun jekyll-rake (command &optional back)
+(defun jekyll-rake (command)
   "run rake commands"
   (let ((command-str (format "bash -c \"cd %s && rake %s\"" jekyll-workdir command))) 
-	(if back (shell-command-to-string command-str) (shell-command command-str))))
+	(shell-command-to-string command-str)))
 
 
 (defun jekyll-new (class title)
