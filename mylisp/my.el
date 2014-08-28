@@ -162,11 +162,13 @@
 ;(global-set-key (kbd "M-s M-d") 'copy-current-line-to-other-window)
 ;(global-set-key (kbd "M-s M-w") 'search-current-line-in-baidu-music)
 (global-set-key (kbd "C-c a i") 'open-init-file)
-(global-set-key (kbd "C-c a m") 'open-my-el-file)
+(global-set-key (kbd "C-c a y") 'open-my-el-file)
 (global-set-key (kbd "M-]") 'find-tag-current-word)
 (global-set-key (kbd "M-p") 'pop-tag-mark)
 (global-set-key (kbd "C-c C-g") 'org-set-tags)
 (global-set-key (kbd "C-M-_") 'find-grep-in-dir)
+(global-set-key (kbd "C-M-]") 'find-grep-current-word)
+(global-set-key (kbd "C-c a") 'org-agenda)
 
 ; for semantic 
 (global-set-key [f12] 'semantic-ia-fast-jump)
