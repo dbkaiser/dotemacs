@@ -45,6 +45,8 @@
 	pymacs   ;; required by ropmacs
 	ropemacs ;; require hg to install ;; it's a little tricky. for the rope and ropemacs are written in python , so we need to install them firstly by running python setup.py in relevant directories. then written certain configurations as down below
 	magit ;;for git operation 
+	graphviz-dot-mode
+
         ))
 
 (el-get 'sync my-packages)
