@@ -7,6 +7,9 @@
 ;; custom scripts
 (add-to-list 'load-path "~/.emacs.d/mylisp/")
 
+;; jekyll blog
+(require 'jekylldk)
+
 (unless (require 'el-get nil t)
   (url-retrieve
    "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
