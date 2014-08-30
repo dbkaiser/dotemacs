@@ -44,9 +44,10 @@
 	simplenote
 	ac-octave
 	echoline-mode
-	header2
+;	header2 ;;this will be moved as self specified script
 	pymacs   ;; required by ropmacs
 	ropemacs ;; require hg to install ;; it's a little tricky. for the rope and ropemacs are written in python , so we need to install them firstly by running python setup.py in relevant directories. then written certain configurations as down below
+	magit ;;for git operation 
         ))
 
 (el-get 'sync my-packages)
@@ -92,6 +93,8 @@
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode)) ;; md file
 (add-to-list 'auto-mode-alist '("\\.markdown" . markdown-mode)) ;; markdown file
 
+;; blog jekyll things
+(require 'jekylldk)
 
 ;; key config
 ;; avoid c-space 
@@ -121,7 +124,8 @@
 (setq simplenote-password nil);; so will ask pwd
 (simplenote-setup)
 
-;; auto-header (require header2)
+;; auto-header 
+(require 'header2)
 (autoload 'auto-update-file-header "header2")
 (autoload 'auto-make-header "header2")
 (add-hook 'write-file-hooks 'auto-update-file-header)
@@ -147,15 +151,16 @@
 ;; TODO 
 
 ;;;; FONTS
-(if (eq system-type 'darwin) (
-	(set-language-environment 'UTF-8)
-	(set-locale-environment "UTF-8")
-	(set-default-font "Dejavu Mono 16")
-	(if (and (fboundp 'daemonp) (daemonp))
-		(add-hook 'after-make-frame-functions
-				  (lambda (frame)
-					(with-selected-frame frame
-					  (set-fontset-font "fontset-default"
-									'unicode "黑体 16"))))
-	  (set-fontset-font "fontset-default" 'unicode "黑体 16")))
+(if (eq system-type 'darwin) 
+	(progn 
+	  (set-language-environment 'UTF-8)
+	  (set-locale-environment "UTF-8")
+	  (set-default-font "Dejavu Mono 16")
+	  (if (and (fboundp 'daemonp) (daemonp))
+		  (add-hook 'after-make-frame-functions
+					(lambda (frame)
+					  (with-selected-frame frame
+						(set-fontset-font "fontset-default"
+										  'unicode "黑体 16"))))
+		(set-fontset-font "fontset-default" 'unicode "黑体 16")))
 )

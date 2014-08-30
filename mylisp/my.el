@@ -3,7 +3,7 @@
 (defun find-grep-in-dir (dir)
   "Run `find-grep' in directory DIR."
   (interactive (list (read-directory-name "Directory to find in: " default-directory "" t)))
-  (let ((prompt (concat "find " dir " -type f ! -path \"*/.svn*\" ! -path \"*~\" -print0 | xargs -0 -e grep -nH -e ")))
+  (let ((prompt (concat "find " dir " -type f ! -path \"*/.svn*\" ! -path \"*~\" ! -path \"cscope*\" -print0 | xargs -0 -e grep -nH -e ")))
     (set-grep-command prompt)
     (call-interactively 'find-grep)))
 
@@ -37,6 +37,15 @@
   (interactive "P")
   (find-grep-current-word default-directory is-prompt))
 
+;; for code jump 
+(defun find-tag-current-word ()
+  "Find the current word without any prompting"
+  (interactive)
+  (let* ((word (current-word))) 
+	(if (not word)
+		(message "No word under cursor.")
+	  (find-tag word))))
+
 (defun set-grep-command (command)
   "Set `grep-command'."
      (setq grep-find-command command))
@@ -52,22 +61,21 @@
 ; Quick open todo file
 (defun open-todo-file ()
   "Open the todo file"
-  (interactive
-   (find-file "~/Dropbox/Ubuntu/todo.org")
-   )
+  (interactive)
+  (find-file "~/Dropbox/Ubuntu/todo.org")
 )
 
 ;; Quick open init emacs file
 (defun open-init-file ()
   "Open the emacs default config file"
-  (interactive
-   (find-file "~/.emacs.d/init.el")))
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
 
 ;; Quick open this file 
 (defun open-my-el-file ()
   "Open this file to edit"
-  (interactive
-   (find-file "~/.emacs.d/mylisp/my.el")))
+  (interactive) 
+  (find-file "~/.emacs.d/mylisp/my.el"))
 
 
 ;; self defined functions
@@ -146,16 +154,21 @@
 ;; quick keys:
 (global-set-key (kbd "C-c C-h") 'org-html-export-to-html)
 (global-set-key (kbd "C-c s i") 'org-insert-src-block)
-(global-set-key (kbd "C-M-_") 'find-grep-current-word-in-current-dir)
 (global-set-key (kbd "M-RET") 'markdown-insert-list-item)
 (global-set-key (kbd "C-c f") 'elisp-index-search)
-(global-set-key (kbd "M-s M-s") 'call-current-songid)
-(global-set-key (kbd "M-s M-a") 'copy-current-word-to-other-window)
-(global-set-key (kbd "M-s M-d") 'copy-current-line-to-other-window)
-(global-set-key (kbd "M-s M-w") 'search-current-line-in-baidu-music)
+;; deprecated
+;(global-set-key (kbd "M-s M-s") 'call-current-songid)
+;(global-set-key (kbd "M-s M-a") 'copy-current-word-to-other-window)
+;(global-set-key (kbd "M-s M-d") 'copy-current-line-to-other-window)
+;(global-set-key (kbd "M-s M-w") 'search-current-line-in-baidu-music)
 (global-set-key (kbd "C-c a i") 'open-init-file)
-(global-set-key (kbd "C-c a m") 'open-my-el-file)
-
+(global-set-key (kbd "C-c a y") 'open-my-el-file)
+(global-set-key (kbd "M-]") 'find-tag-current-word)
+(global-set-key (kbd "M-p") 'pop-tag-mark)
+(global-set-key (kbd "C-c C-g") 'org-set-tags)
+(global-set-key (kbd "C-M-_") 'find-grep-in-dir)
+(global-set-key (kbd "C-M-]") 'find-grep-current-word)
+(global-set-key (kbd "C-c a") 'org-agenda)
 
 ; for semantic 
 (global-set-key [f12] 'semantic-ia-fast-jump)

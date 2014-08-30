@@ -1,6 +1,12 @@
 *.elc
 *~
 *.dat
-#*
+\#*
 url/*
 *.pyc
+
+# For specific things
+srecode-map.el
+ac-comphist.dat
+semanticdb/
+ede-projects.el
