@@ -46,11 +46,13 @@
 	ropemacs ;; require hg to install ;; it's a little tricky. for the rope and ropemacs are written in python , so we need to install them firstly by running python setup.py in relevant directories. then written certain configurations as down below
 	magit ;;for git operation 
 	graphviz-dot-mode
-
+	jdee  ;; attention: this might require you to change the recipt file to another svn repo
         ))
 
 (el-get 'sync my-packages)
 
+(add-to-list 'load-path "~/.emacs.d/el-get/jdee/lisp")
+(load "jde")
 ;; third-party tool config
 
 ;; cedet config
@@ -163,3 +165,15 @@
 										  'unicode "黑体 16"))))
 		(set-fontset-font "fontset-default" 'unicode "黑体 16")))
 )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/workspace/docs/todo.org"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -169,6 +169,8 @@
 (global-set-key (kbd "C-M-_") 'find-grep-in-dir)
 (global-set-key (kbd "C-M-]") 'find-grep-current-word)
 (global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key [f5] 'toggle-truncate-lines)
+
 
 ; for semantic 
 (global-set-key [f12] 'semantic-ia-fast-jump)
