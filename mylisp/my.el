@@ -129,6 +129,71 @@
   str
 )
 
+;; curl function, ez to inspect respond json code from local url request
+(defun url-json-calling-on-current-line ()
+  "Call the url on current line"
+  (interactive)
+  (let ((content (chomp (thing-at-point 'line))))
+	(message (concat "Getting: " content))
+	(url-json-calling content)))
+
+(defun url-json-calling (call-url)
+  "call the `CALL-URL` and get the respond, put it into a json readable format. put into a new buffer and display it"
+  (interactive
+   (list (read-string "Retrive url: " )))
+  (let(
+	   (url-request-method "GET")
+	   (url-request-extra-headers '(("Content-Type" . "application/x-www-form-urlencoded"))))
+	(url-retrieve
+	 call-url 'json-dealing)))
+
+(defun json-dealing (status)
+  "deal with the respond url and format it into json readable format"
+  (switch-to-buffer (current-buffer))
+  (goto-char (point-min))
+  (search-forward-regexp "^$" nil t)
+  (kill-region (1+ (point)) (point-max))
+  (kill-buffer)
+  (delete-other-windows)
+  (split-window-right)
+  (other-window 1)
+  (switch-to-buffer "output")
+  (goto-char (point-min))
+  (yank)
+  (kill-region (1+ (point)) (point-max))
+  (json-mode)
+  (json-reformat-region (point-min) (point-max))
+  (other-window 1))
+
+(defun get-response (url)
+  "Get the http response info."
+  (interactive (list (read-string "getResponse: ")))
+  (let
+    (
+      (url-request-method "GET")
+      (url-request-extra-headers '(("Content-Type" . "application/x-www-form-urlencoded")))
+      (buffer (url-retrieve-synchronously url)))
+    (save-excursion
+      (set-buffer buffer)
+      (goto-char (point-min))
+      (concat (buffer-substring-no-properties (point) (point-max))) )))
+
+
+;; markdown functions
+;; insert source code block
+(defun markdown-insert-src-block (src-code-type)
+  "Insert a `SRC-CODE-TYPE` type source code block into pygemnts support markdown mode"
+  (interactive
+   (let ((src-code-types
+		  '("ruby" "python" "php" "C" "java" "bash" "C++" "css"
+			"text" "raw" "dot" "lisp" "matlab" "latex" "org" "perl")))
+	 (list (ido-completing-read "Source code type: " src-code-types))))
+  (progn
+	(newline-and-indent)
+	(insert (format "{%s highlight %s %s}\n" "%" src-code-type "%"))
+	(newline-and-indent)
+	(insert "{% endhighlight %}\n")
+	(previous-line 2)))
 
 ;; org functions
 ;; insert source code block
@@ -181,6 +246,7 @@
 (global-set-key (kbd "C-M-_") 'find-grep-in-dir)
 (global-set-key (kbd "C-M-]") 'find-grep-current-word)
 (global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "M-s c") 'url-json-calling-on-current-line)
 (global-set-key [f5] 'toggle-truncate-lines)
 
 
