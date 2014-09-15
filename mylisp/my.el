@@ -1,11 +1,12 @@
 ;; fancy grep functions from ahei
-;;;###autoload
-(defun find-grep-in-dir (dir)
+
+(defun find-grep-in-dir (arg)
   "Run `find-grep' in directory DIR."
-  (interactive (list (read-directory-name "Directory to find in: " default-directory "" t)))
-  (let ((prompt (concat "find " dir " -type f ! -path \"*/.svn*\" ! -path \"*~\" ! -path \"cscope*\" -print0 | xargs -0 -e grep -nH -e ")))
-    (set-grep-command prompt)
-    (call-interactively 'find-grep)))
+  (interactive (list (ido-read-directory-name "Directory to find in: " default-directory "" t)))
+  (let ((prompting (concat "find " arg " -type f ! -path \"*/.svn*\" ! -path \"*~\" ! -path \"cscope*\" -print0 | xargs -0 -e grep -nH -e ")))
+    (set-grep-command prompting)
+    (call-interactively 'find-grep)
+	(setq grep-host-defaults-alist nil))); this REALLY SUCKS!! why do i should have use this!!!
 
 ;;;###autoload
 (defun find-grep-in-current-dir (dir)
@@ -29,7 +30,8 @@
               (concat grep-command word " " dir "/*")))
       (if is-prompt
           (grep (read-shell-command "Run grep (like this): " command-args 'grep-history))
-        (grep command-args)))))
+        (grep command-args))))
+  )
 
 ;;;###autoload
 (defun find-grep-current-word-in-current-dir (&optional is-prompt)
@@ -48,7 +50,7 @@
 
 (defun set-grep-command (command)
   "Set `grep-command'."
-     (setq grep-find-command command))
+  (setq grep-find-command command))
 
 ; Blog saving function
 (defun save-blog-today ()
@@ -147,6 +149,16 @@
     (insert "#+END_SRC\n")
     (previous-line 2)
     (org-edit-src-code)))
+
+;; geben test
+(defun my-php-debug ()
+  "Run current PHP script for debugging with geben"
+  (interactive)
+  (call-interactively 'geben)
+  (shell-command
+    (concat "XDEBUG_CONFIG='idekey=my-php-dong' /usr/bin/php "
+    (buffer-file-name) " &"))
+  )
 
 ;; windows settings
 (set-background-color "LightYellow2")

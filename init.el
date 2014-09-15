@@ -46,14 +46,16 @@
 	ropemacs ;; require hg to install ;; it's a little tricky. for the rope and ropemacs are written in python , so we need to install them firstly by running python setup.py in relevant directories. then written certain configurations as down below
 	magit ;;for git operation 
 	graphviz-dot-mode
-	jdee  ;; attention: this might require you to change the recipt file to another svn repo
+;	jdee  ;; attention: this might require you to change the recipt file to another svn repo
+	geben
+	hl-line+
         ))
 
 (el-get 'sync my-packages)
 
-(add-to-list 'load-path "~/.emacs.d/el-get/jdee/lisp")
+; somegthing is wrong with el-get for jdee. so put it manually.
+(add-to-list 'load-path "~/.emacs.d/third-party/jdee-2.4.1/lisp")
 (load "jde")
-;; third-party tool config
 
 ;; cedet config
 ;; mode config
@@ -114,6 +116,12 @@
 ;; golden ratio mode
 (golden-ratio-mode 0)
 
+;; higlight current line
+(hl-line-toggle-when-idle 1)
+;(hl-line-mode t)
+;(set-face-background hl-line-face "green")
+
+
 ;; themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 ;; temperarily use this theme
@@ -134,6 +142,7 @@
 (add-hook 'c-mode-common-hook   'auto-make-header)
 (add-hook 'python-mode-hook   'auto-make-header)
 (add-hook 'sh-mode-hook   'auto-make-header)
+
 
 ;; rope emacs configurations
 
