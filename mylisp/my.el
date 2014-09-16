@@ -138,7 +138,7 @@
 	(url-json-calling content)))
 
 (defun url-json-calling (call-url)
-  "call the `CALL-URL` and get the respond, put it into a json readable format. put into a new buffer and display it"
+  "Call the `CALL-URL` and get the respond, put it into a json readable format. put into a new buffer and display it"
   (interactive
    (list (read-string "Retrive url: " )))
   (let(
@@ -148,7 +148,7 @@
 	 call-url 'json-dealing)))
 
 (defun json-dealing (status)
-  "deal with the respond url and format it into json readable format"
+  "Deal with the respond url and format it into json readable format"
   (switch-to-buffer (current-buffer))
   (goto-char (point-min))
   (search-forward-regexp "^$" nil t)
@@ -164,19 +164,6 @@
   (json-mode)
   (json-reformat-region (point-min) (point-max))
   (other-window 1))
-
-(defun get-response (url)
-  "Get the http response info."
-  (interactive (list (read-string "getResponse: ")))
-  (let
-    (
-      (url-request-method "GET")
-      (url-request-extra-headers '(("Content-Type" . "application/x-www-form-urlencoded")))
-      (buffer (url-retrieve-synchronously url)))
-    (save-excursion
-      (set-buffer buffer)
-      (goto-char (point-min))
-      (concat (buffer-substring-no-properties (point) (point-max))) )))
 
 
 ;; markdown functions
@@ -247,6 +234,7 @@
 (global-set-key (kbd "C-M-]") 'find-grep-current-word)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "M-s c") 'url-json-calling-on-current-line)
+(global-set-key (kbd "M-s l") 'markdown-insert-src-block)
 (global-set-key [f5] 'toggle-truncate-lines)
 
 

@@ -139,7 +139,10 @@
 (autoload 'auto-make-header "header2")
 (add-hook 'write-file-hooks 'auto-update-file-header)
 (add-hook 'emacs-lisp-mode-hook 'auto-make-header)
-(add-hook 'c-mode-common-hook   'auto-make-header)
+;(add-hook 'c-mode-common-hook   'auto-make-header)
+(add-hook 'c-mode-hook   'auto-make-header)
+(add-hook 'c++-mode-hook   'auto-make-header)
+(add-hook 'awk-mode-hook   'auto-make-header)
 (add-hook 'python-mode-hook   'auto-make-header)
 (add-hook 'sh-mode-hook   'auto-make-header)
 
