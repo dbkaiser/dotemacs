@@ -133,6 +133,7 @@
 (defun url-json-calling-on-current-line ()
   "Call the url on current line"
   (interactive)
+  (message (thing-at-point 'line))
   (let ((content (chomp (thing-at-point 'line))))
 	(message (concat "Getting: " content))
 	(url-json-calling content)))
@@ -235,6 +236,7 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "M-s c") 'url-json-calling-on-current-line)
 (global-set-key (kbd "M-s l") 'markdown-insert-src-block)
+(global-set-key (kbd "C-x v p") 'vc-version-diff)
 (global-set-key [f5] 'toggle-truncate-lines)
 
 
