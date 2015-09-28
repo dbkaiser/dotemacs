@@ -1,6 +1,11 @@
 ;; init file for emacs
 ;; dongbo
 
+;;melpa
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+
 ;; el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
@@ -28,6 +33,7 @@
 	emacs-w3m
 	wc-mode
 	org-mode
+	json-mode ;; json mode
 	markdown-mode
 	auto-complete
 	auto-complete-emacs-lisp
@@ -49,13 +55,16 @@
 ;	jdee  ;; attention: this might require you to change the recipt file to another svn repo
 	geben
 	hl-line+
+	malabar-mode
+	psvn
+	jekyll-el ;; for sth of jekyll.
         ))
 
 (el-get 'sync my-packages)
 
 ; somegthing is wrong with el-get for jdee. so put it manually.
-(add-to-list 'load-path "~/.emacs.d/third-party/jdee-2.4.1/lisp")
-(load "jde")
+;(add-to-list 'load-path "~/.emacs.d/third-party/jdee-2.4.1/lisp")
+;(load "jde")
 
 ;; cedet config
 ;; mode config
@@ -80,6 +89,27 @@
 	  c-basic-offset 4)
 ;; ido mode
 (ido-mode t)
+
+
+;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+;(global-set-key (kbd "C-c h") 'helm-command-prefix)
+;(global-unset-key (kbd "C-x c"))
+
+;(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+;(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+;(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+;(when (executable-find "curl")
+;n  (setq helm-google-suggest-use-curl-p t))
+
+;(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+;      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+;      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+;      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+;      helm-ff-file-name-history-use-recentf t)
+;(helm-mode 1)
 
 ;; auto mode
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)) ;; yaml
@@ -177,11 +207,14 @@
 										  'unicode "黑体 16"))))
 		(set-fontset-font "fontset-default" 'unicode "黑体 16")))
 )
+(setq org-src-fontify-natively t)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("eb8701083acffcb4ae592fb78f236b3d5f62cdc841e2b83cefbbfdd4126f205c" default)))
  '(org-agenda-files (quote ("~/workspace/docs/todo.org"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

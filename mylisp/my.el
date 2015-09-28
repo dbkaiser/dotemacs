@@ -3,7 +3,7 @@
 (defun find-grep-in-dir (arg)
   "Run `find-grep' in directory DIR."
   (interactive (list (ido-read-directory-name "Directory to find in: " default-directory "" t)))
-  (let ((prompting (concat "find " arg " -type f ! -path \"*/.svn*\" ! -path \"*~\" ! -path \"cscope*\" -print0 | xargs -0 -e grep -nH -e ")))
+  (let ((prompting (concat "find " arg " -type f ! -path \"*/.svn*\" ! -path \"*~\" ! -path \"cscope*\" -path \"*.php\" -print0 | xargs -0 -e grep -nH -e ")))
     (set-grep-command prompting)
     (call-interactively 'find-grep)
 	(setq grep-host-defaults-alist nil))); this REALLY SUCKS!! why do i should have use this!!!
@@ -202,6 +202,35 @@
     (insert "#+END_SRC\n")
     (previous-line 2)
     (org-edit-src-code)))
+
+(setq org-publish-project-alist
+      '(
+
+		("org-dkblog-post"
+		 ;; Path to your org files.
+		 :base-directory "~/Document/blog/org/"
+		 :base-extension "org"
+
+		 ;; Path to your Jekyll project.
+		 :publishing-directory "~/Document/blog/githubblog/"
+		 :recursive t
+		 :publishing-function org-html-publish-org-to-html
+		 :headline-levels 4 
+		 :html-extension "html"
+		 :body-only t ;; Only export section between <body> </body>
+		 )
+
+
+		("org-static-dk"
+		 :base-directory "~/Document/blog/org/"
+		 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
+		 :publishing-directory "~/Document/blog/githubblog/"
+		 :recursive t
+		 :publishing-function org-publish-attachment)
+
+		("dkblog" :components ("org-dbblog-post" "org-static-dk"))
+
+		))
 
 ;; geben test
 (defun my-php-debug ()
