@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: getall
+# key: getall
+# binding: direct-keybinding
+# --
+global $1;
+\$sql="$2";
+\$rows=$1->getAll(\$sql);

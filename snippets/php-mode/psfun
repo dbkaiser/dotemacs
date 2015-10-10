@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: psfun
+# key: psfun
+# binding: direct-keybinding
+# --
+public static function $1($2){
+	$3
+}
