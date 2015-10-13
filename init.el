@@ -215,6 +215,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("c4a8c22ee0e467dd7aae8a0a70fc9f2859142643423ab6f9e096e6c25ab1865d" "5a919e7e83869530ab62dbfa08dea0ac3b3e2446ab3da4906b2f5ae76757cfd9" "738df5c329b483a871a7dc1a50f384225088fbbc24b1a2d76744f1052c419037" "336a0b40a84de79d77430882018df30b77ad2340aa4fc265a44e82aa5eeeee9f" default)))
  '(fci-rule-color "#383838")
  '(org-agenda-files (quote ("~/workspace/docs/todo.org")))
  '(sr-speedbar-default-width 10)

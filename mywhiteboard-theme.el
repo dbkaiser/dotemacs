@@ -1,5 +1,5 @@
 (deftheme mywhiteboard
-  "Created 2015-10-10.")
+  "Created 2015-10-12.")
 
 (custom-theme-set-faces
  'mywhiteboard
@@ -24,7 +24,7 @@
  '(font-lock-constant-face ((((class color) (min-colors 89)) (:foreground "DarkOliveGreen4"))))
  '(font-lock-doc-face ((((class color) (min-colors 89)) (:foreground "peru"))))
  '(font-lock-doc-string-face ((((class color) (min-colors 89)) (:foreground "peru"))))
- '(font-lock-function-name-face ((((class color) (min-colors 89)) (:foreground "goldenrod3"))))
+ '(font-lock-function-name-face ((t (:foreground "blue"))))
  '(font-lock-keyword-face ((((class color) (min-colors 89)) (:foreground "DodgerBlue2"))))
  '(font-lock-preprocessor-face ((((class color) (min-colors 89)) (:foreground "gold3"))))
  '(font-lock-reference-face ((((class color) (min-colors 89)) (:foreground "salmon"))))
@@ -50,7 +50,7 @@
  '(minibuffer-prompt ((((class color) (min-colors 89)) (:foreground "DodgerBlue4"))))
  '(mode-line ((((class color) (min-colors 89)) (:background "gray75" :foreground "black" :box (:line-width 1 :style released-button)))))
  '(mode-line-buffer-id ((((class color) (min-colors 89)) (:weight bold :background nil :foreground "blue4"))))
- '(mode-line-inactive ((((class color) (min-colors 89)) (:background "gray40" :foreground "black" :box (:line-width 1 :color "gray40" :style nil)))))
+ '(mode-line-inactive ((t (:background "white" :foreground "black" :box (:line-width 1 :color "white")))))
  '(outline-1 ((((class color) (min-colors 89)) (:foreground "Blue3"))))
  '(outline-2 ((((class color) (min-colors 89)) (:foreground "DodgerBlue"))))
  '(outline-3 ((((class color) (min-colors 89)) (:foreground "SteelBlue"))))
