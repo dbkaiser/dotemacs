@@ -1,12 +1,16 @@
 (deftheme mywhiteboard
-  "Created 2015-10-12.")
+  "Created 2015-10-13.")
+
+(custom-theme-set-variables
+ 'mywhiteboard
+ '(frame-background-mode (quote light)))
 
 (custom-theme-set-faces
  'mywhiteboard
- '(Info-title-1-face ((((class color) (min-colors 89)) (:family "helv" :weight bold :height 1.728))))
- '(Info-title-2-face ((((class color) (min-colors 89)) (:family "helv" :weight bold :height 1.44))))
- '(Info-title-3-face ((((class color) (min-colors 89)) (:family "helv" :weight bold :height 1.2))))
- '(Info-title-4-face ((((class color) (min-colors 89)) (:family "helv" :weight bold))))
+ '(info-title-1 ((((class color) (min-colors 89)) (:family "helv" :weight bold :height 1.728))))
+ '(info-title-2 ((((class color) (min-colors 89)) (:family "helv" :weight bold :height 1.44))))
+ '(info-title-3 ((((class color) (min-colors 89)) (:family "helv" :weight bold :height 1.2))))
+ '(info-title-4 ((((class color) (min-colors 89)) (:family "helv" :weight bold))))
  '(compilation-column-number ((((class color) (min-colors 89)) (:foreground "DarkGreen"))))
  '(compilation-error ((((class color) (min-colors 89)) (:foreground "Red1"))))
  '(compilation-info ((((class color) (min-colors 89)) (:weight normal :foreground "DeepSkyBlue4"))))
@@ -20,7 +24,7 @@
  '(flymake-warnline ((((class color) (min-colors 89)) (:background nil :underline "magenta3"))))
  '(font-lock-builtin-face ((((class color) (min-colors 89)) (:foreground "DarkOrange3"))))
  '(font-lock-comment-delimiter-face ((((class color) (min-colors 89)) (:foreground "gray50"))))
- '(font-lock-comment-face ((((class color) (min-colors 89)) (:foreground "gray50"))))
+ '(font-lock-comment-face ((t (:foreground "color-136"))))
  '(font-lock-constant-face ((((class color) (min-colors 89)) (:foreground "DarkOliveGreen4"))))
  '(font-lock-doc-face ((((class color) (min-colors 89)) (:foreground "peru"))))
  '(font-lock-doc-string-face ((((class color) (min-colors 89)) (:foreground "peru"))))
@@ -61,6 +65,10 @@
  '(show-paren-match ((((class color) (min-colors 89)) (:background "dodgerblue1" :foreground "white"))))
  '(show-paren-mismatch ((((class color) (min-colors 89)) (:background "red1" :foreground "white"))))
  '(warning ((((class color) (min-colors 89)) (:foreground "Yellow4"))))
- '(default ((t (:foreground "black")))))
+ '(diff-added ((t (:foreground "green" :background "#ddffdd" :inherit diff-changed))))
+ '(default ((t (:foreground "black"))))
+ '(diff-removed ((t (:inherit diff-changed :background "#ffdddd" :foreground "red"))))
+ '(diff-header ((t (:background "color-254"))))
+ '(diff-file-header ((t (:background "color-253" :weight bold)))))
 
 (provide-theme 'mywhiteboard)
